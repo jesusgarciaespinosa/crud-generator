@@ -1,25 +1,26 @@
 {
-    "name": "appzcoder/crud-generator",
+    "name": "jesusgarciaespinosa/crud-generator",
     "license": "MIT",
-    "description": "Laravel CRUD Generator",
+    "description": "Lumen CRUD Generator",
     "keywords": [
-        "laravel",
+        "lumen",
         "crud",
         "crud generator",
-        "laravel crud generator",
+        "lumen crud generator",
         "api generator"
     ],
     "authors": [
         {
-            "name": "Sohel Amin",
-            "email": "sohelamincse@gmail.com",
-            "homepage": "http://www.appzcoder.com"
+            "name": "Jesus Garcia Espinosa",
+            "email": "jesus.garcia.espinosa@gmail.com",
+            "homepage": "https://github.com/jesusgarciaespinosa"
         }
     ],
     "require": {
         "php": ">=5.6.4|>=7.0",
         "illuminate/support": "^5.3|^6.0",
-        "laravelcollective/html": "^5.3|^6.0"
+        "laravelcollective/html": "^5.3|^6.0",
+        "laravel/lumen-framework": "^6.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.6",
@@ -28,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Appzcoder\\CrudGenerator\\": "src/"
+            "Jge\\CrudGenerator\\": "src/"
         },
         "classmap": [
             "tests"
@@ -37,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Appzcoder\\CrudGenerator\\CrudGeneratorServiceProvider"
+                "Jge\\CrudGenerator\\CrudGeneratorServiceProvider"
             ]
         }
     }

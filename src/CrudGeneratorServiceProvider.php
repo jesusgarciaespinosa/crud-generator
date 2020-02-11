@@ -1,6 +1,6 @@
 <?php
 
-namespace Appzcoder\CrudGenerator;
+namespace Jge\CrudGenerator;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -47,14 +47,14 @@ class CrudGeneratorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands(
-            'Appzcoder\CrudGenerator\Commands\CrudCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudControllerCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudModelCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudMigrationCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudViewCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudLangCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudApiCommand',
-            'Appzcoder\CrudGenerator\Commands\CrudApiControllerCommand'
+            'Jge\CrudGenerator\Commands\CrudCommand',
+            'Jge\CrudGenerator\Commands\CrudControllerCommand',
+            'Jge\CrudGenerator\Commands\CrudModelCommand',
+            'Jge\CrudGenerator\Commands\CrudMigrationCommand',
+            'Jge\CrudGenerator\Commands\CrudViewCommand',
+            'Jge\CrudGenerator\Commands\CrudLangCommand',
+            'Jge\CrudGenerator\Commands\CrudApiCommand',
+            'Jge\CrudGenerator\Commands\CrudApiControllerCommand'
         );
     }
 }

@@ -10,75 +10,36 @@ use Illuminate\Http\Request;
 
 class DummyClass extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    
+    public function showAll()
     {
-        ${{crudName}} = {{modelName}}::latest()->paginate({{pagination}});
-
-        return ${{crudName}};
+        return response()->json({{modelName}}::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show($id)
     {
-        {{validationRules}}
+        return response()->json({{modelName}}::find($id));
+    }
+    
+   public function create(Request $request)
+    {
         ${{crudNameSingular}} = {{modelName}}::create($request->all());
 
         return response()->json(${{crudNameSingular}}, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update($id, Request $request)
     {
-        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
-
-        return ${{crudNameSingular}};
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        {{validationRules}}
         ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
         ${{crudNameSingular}}->update($request->all());
 
         return response()->json(${{crudNameSingular}}, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        {{modelName}}::destroy($id);
-
-        return response()->json(null, 204);
+        {{modelName}}::findOrFail($id)->delete();
+        return response('Deleted Successfully', 200);
     }
+
 }

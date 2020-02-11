@@ -1,6 +1,6 @@
 <?php
 
-namespace Appzcoder\CrudGenerator\Commands;
+namespace Jge\CrudGenerator\Commands;
 
 use File;
 use Illuminate\Console\Command;
@@ -126,11 +126,8 @@ class CrudApiCommand extends Command
         }
 
         // Updating the Http/routes.php file
-        $routeFile = app_path('Http/routes.php');
 
-        if (\App::VERSION() >= '5.3') {
-            $routeFile = base_path('routes/api.php');
-        }
+        $routeFile = base_path('routes/web.php');
 
         if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
             $this->controller = ($controllerNamespace != '') ? $controllerNamespace . '\\' . $name . 'Controller' : $name . 'Controller';
@@ -152,7 +149,13 @@ class CrudApiCommand extends Command
      */
     protected function addRoutes()
     {
-        return ["Route::resource('" . $this->routeName . "', '" . $this->controller . "', ['except' => ['create', 'edit']]);"];
+        return [
+            "\$router->get('".$this->routeName."',  ['uses' => '".$this->controller."@showAll']);", 
+            "\$router->get('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@show']);", 
+            "\$router->post('".$this->routeName."',  ['uses' => '".$this->controller."@create']);", 
+            "\$router->delete('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@delete']);", 
+            "\$router->put('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@updatedelete']);"
+        ];
     }
 
     /**
