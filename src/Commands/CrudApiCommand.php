@@ -154,7 +154,7 @@ class CrudApiCommand extends Command
             "\$router->get('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@show']);", 
             "\$router->post('".$this->routeName."',  ['uses' => '".$this->controller."@create']);", 
             "\$router->delete('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@delete']);", 
-            "\$router->put('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@updatedelete']);"
+            "\$router->put('".$this->routeName."/{id}',  ['uses' => '".$this->controller."@update']);"
         ];
     }
 
