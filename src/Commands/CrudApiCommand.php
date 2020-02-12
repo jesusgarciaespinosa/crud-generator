@@ -2,7 +2,7 @@
 
 namespace Jge\CrudGenerator\Commands;
 
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
