@@ -17,7 +17,8 @@ class CrudModelCommand extends GeneratorCommand
                             {--fillable= : The names of the fillable columns.}
                             {--relationships= : The relationships for the model}
                             {--pk=id : The name of the primary key.}
-                            {--soft-deletes=no : Include soft deletes fields.}';
+                            {--soft-deletes=no : Include soft deletes fields.}
+                            {--mongodb=yes/no : To enable mongo}';
 
     /**
      * The console command description.
@@ -38,11 +39,12 @@ class CrudModelCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function getStub()
+    protected function getStub($is_mongodb = false)
     {
+        $model = ($is_mongodb ? 'mongo_model' : 'model');
         return config('crudgenerator.custom_template')
-        ? config('crudgenerator.path') . '/model.stub'
-        : __DIR__ . '/../stubs/model.stub';
+        ? config('crudgenerator.path') . '/'.$model.'.stub'
+        : __DIR__ . '/../stubs/'.$model.'.stub';
     }
 
     /**
@@ -65,7 +67,8 @@ class CrudModelCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-        $stub = $this->files->get($this->getStub());
+        $is_mongodb = ($this->option('mongodb')=='yes' ? true : false);
+        $stub = $this->files->get($this->getStub($is_mongodb));
 
         $table = $this->option('table') ?: $this->argument('name');
         $fillable = $this->option('fillable');

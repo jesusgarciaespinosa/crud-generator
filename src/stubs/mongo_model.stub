@@ -1,0 +1,29 @@
+<?php
+
+namespace DummyNamespace;
+
+use Jenssegers\Mongodb\Eloquent\Model;
+{{useSoftDeletes}}
+class DummyClass extends Model
+{
+    {{softDeletes}}/**
+     * The collection used by the model.
+     *
+     * @var string
+     */
+
+    protected $collection = '{{table}}';
+
+    {{primaryKey}}
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = {{fillable}};
+
+    protected $hidden = [];
+
+    {{relationships}}
+}

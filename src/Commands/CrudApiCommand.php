@@ -27,7 +27,8 @@ class CrudApiCommand extends Command
                             {--relationships= : The relationships for the model.}
                             {--route=yes : Include Crud route to routes.php? yes|no.}
                             {--route-group= : Prefix of the route group.}
-                            {--soft-deletes=no : Include soft deletes fields.}';
+                            {--soft-deletes=no : Include soft deletes fields.}
+                            {--mongodb=yes/no : To enable mongo}';
 
     /**
      * The console command description.
@@ -115,15 +116,11 @@ class CrudApiCommand extends Command
         }
 
         $softDeletes = $this->option('soft-deletes');
+        $mongodb = $this->option('mongodb');
 
         $this->call('crud:api-controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--model-name' => $modelName, '--model-namespace' => $modelNamespace, '--pagination' => $perPage, '--validations' => $validations]);
-        $this->call('crud:model', ['name' => $modelNamespace . $modelName, '--fillable' => $fillable, '--table' => $tableName, '--pk' => $primaryKey, '--relationships' => $relationships, '--soft-deletes' => $softDeletes]);
+        $this->call('crud:model', ['name' => $modelNamespace . $modelName, '--fillable' => $fillable, '--table' => $tableName, '--pk' => $primaryKey, '--relationships' => $relationships, '--soft-deletes' => $softDeletes, '--mongodb' => $mongodb]);
         $this->call('crud:migration', ['name' => $migrationName, '--schema' => $migrationFields, '--pk' => $primaryKey, '--indexes' => $indexes, '--foreign-keys' => $foreignKeys, '--soft-deletes' => $softDeletes]);
-
-        // For optimizing the class loader
-        if (\App::VERSION() < '5.6') {
-            $this->callSilent('optimize');
-        }
 
         // Updating the Http/routes.php file
 
