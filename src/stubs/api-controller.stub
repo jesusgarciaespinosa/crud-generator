@@ -12,33 +12,52 @@ class DummyClass extends Controller
     
     public function showAll()
     {
-        return response()->json({{modelName}}::all());
+        try {
+            return $this->success({{modelName}}::all());
+        } catch (Exception $e) {
+            return $this->error(config('crudgenerator.error_return_data'));
+        }
     }
 
     public function show($id)
     {
-        return response()->json({{modelName}}::find($id));
+        try {
+            return $this->success({{modelName}}::find($id));
+        } catch (Exception $e) {
+            return $this->error(config('crudgenerator.error_return_data'));
+        }
     }
     
    public function create(Request $request)
     {
-        ${{crudNameSingular}} = {{modelName}}::create($request->all());
-
-        return response()->json(${{crudNameSingular}}, 201);
+        try {
+            ${{crudNameSingular}} = {{modelName}}::create($request->all());
+            return $this->success(${{crudNameSingular}});
+        } catch (Exception $e) {
+            return $this->error(config('crudgenerator.error_create_record'));
+        }
+        
     }
 
     public function update($id, Request $request)
     {
-        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
-        ${{crudNameSingular}}->update($request->all());
-
-        return response()->json(${{crudNameSingular}}, 200);
+        try {
+            ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+            ${{crudNameSingular}}->update($request->all());
+            return $this->success(${{crudNameSingular}});
+        } catch (Exception $e) {
+            return $this->error(config('crudgenerator.error_update_record'));
+        }
     }
 
     public function delete($id)
     {
-        {{modelName}}::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        try {
+            {{modelName}}::findOrFail($id)->delete();
+            return $this->success();
+        } catch (Exception $e) {
+            return $this->error(config('crudgenerator.error_delete_record'));
+        }
     }
 
 }

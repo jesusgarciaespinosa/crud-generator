@@ -64,7 +64,10 @@ return [
          * Add new stubs templates here if you need to, like action, datatable...
          * custom_template needs to be activated for this to work
          */
-    ]
-
+    ], 
+    'error_return_data' => 'This process has failed.',
+    'error_create_record' => 'This process has failed.',
+    'error_update_record' => 'This process has failed.',
+    'error_delete_record' => 'This process has failed.',
 
 ];
