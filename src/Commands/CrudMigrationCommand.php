@@ -17,7 +17,8 @@ class CrudMigrationCommand extends GeneratorCommand
                             {--indexes= : The fields to add an index to.}
                             {--foreign-keys= : Foreign keys.}
                             {--pk=id : The name of the primary key.}
-                            {--soft-deletes=no : Include soft deletes fields.}';
+                            {--soft-deletes=no : Include soft deletes fields.}
+                            {--mongodb=yes/no : To enable mongo}';
 
     /**
      * The console command description.
@@ -109,6 +110,8 @@ class CrudMigrationCommand extends GeneratorCommand
 
         $schema = rtrim($this->option('schema'), ';');
         $fields = explode(';', $schema);
+
+        $mongodb = $this->option('mongodb');
 
         $data = array();
 
@@ -232,9 +235,9 @@ class CrudMigrationCommand extends GeneratorCommand
         }
 
         $schemaUp =
-            "Schema::create('" . $tableName . "', function (Blueprint \$table) {
-            \$table->increments('" . $primaryKey . "');
-            \$table->timestamps();\n" . $tabIndent . $tabIndent . $tabIndent .
+            "Schema::create('" . $tableName . "', function (Blueprint \$table) {".
+            ($mongodb ? "" : "\$table->increments('" . $primaryKey . "');").
+            "\$table->timestamps();\n" . $tabIndent . $tabIndent . $tabIndent .
             $softDeletesSnippets .
             $schemaFields .
         "});";

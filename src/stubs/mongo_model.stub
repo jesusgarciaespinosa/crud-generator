@@ -14,8 +14,6 @@ class DummyClass extends Model
 
     protected $collection = '{{table}}';
 
-    {{primaryKey}}
-
     /**
      * Attributes that should be mass-assignable.
      *
